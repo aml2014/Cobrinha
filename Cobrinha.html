@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html style="background-color: #CCC;">
+<head>
+    
+    <title>Jogo da cobrinha</title>
+</head>
+
+<body>
+    <h1 id="p">Pontuação: 0</h1>
+    <canvas id="cobra" width="600" height="600"></canvas>
+    <h1>Use esse INPUT(Coisa abaixo) enquanto tiver jogando</h1>
+    <input placeholder="Tamanho do rabo" id="rabo" type="number">
+    <button onclick="Ver()">Ver</button>
+    <h3 >Aperte "CTRL" + "-"</h3>
+    <script>
+        function Ver() {
+            alert("Certo!")
+            alert("Mas me responda")
+            var GitHub = prompt("Qual é o meu nome no GitHub")
+            if(GitHub == "Arthur Lara"){
+                alert("Pronto!")
+            x = document.getElementById("rabo").value;
+            tail = x;
+            }
+            else{
+                alert("Errado")
+            }
+
+            }
+        window.onload = function(){
+ 
+            var stage = document.getElementById('cobra');
+            var ctx = stage.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+            setInterval(jogo , 120);
+ 
+            const vel = 1;
+ 
+            var vx = vy = 0; //i
+            var px =10;      //i
+            var py = 15;     //i
+            var tp = 30;     //i--------Variaveis
+            var qp = 20;     //i
+            var ax=ay=15;    //i
+ 
+            var trail = [];
+
+ 
+            function jogo(){
+                px += vx;
+                py += vy;
+                if (px <0) {
+                    px = qp-1;
+                }
+                if (px > qp-1) {
+                    px = 0;
+                }
+                if (py < 0) {
+                    py = qp-1;
+                }
+                if (py > qp-1) {
+                    py = 0;
+                }
+ 
+                ctx.fillStyle = "greenyellow";
+                ctx.fillRect(0,0, stage.width, stage.height);
+ 
+                ctx.fillStyle = "red";
+                ctx.fillRect(ax*tp, ay*tp, tp,tp);
+ 
+                ctx.fillStyle = "blue";
+                for (var i = 0; i < trail.length; i++) {
+                    ctx.fillRect(trail[i].x*tp, trail[i].y*tp, tp-1,tp-1);
+                    if (trail[i].x == px && trail[i].y == py)
+                    {
+                        vx = vy=0;
+                        tail =2;
+                    }
+                }
+ 
+                trail.push({x:px,y:py })
+                while (trail.length > tail) {
+                    trail.shift();
+                }
+ 
+                if (ax==px && ay==py){
+                    tail++;
+                    ax = Math.floor(Math.random()*qp);
+                    ay = Math.floor(Math.random()*qp);
+                }
+                document.getElementById("p").innerText = "Pontuação: " + tail
+                if(tail == 240) {
+                    alert("Parabéns você GANHOL")
+
+                    vx = vy=0;
+                    tail =2;
+                }
+
+            
+
+                
+            }
+            function keyPush(event){ 
+ 
+                switch (event.keyCode) {
+                    case 37: // Esquerda
+                        vx = -vel;
+                        vy = 0;
+                        break;
+                    case 38: // cima
+                        vx = 0;
+                        vy = -vel;
+                        break;
+                    case 39: // baixo
+                        vx = vel;
+                        vy = 0;
+                        break;
+                    case 40: // direita
+                        vx = 0;
+                        vy = vel;
+                        break;    
+                    case 80:
+                        alert("Feito por Arthur Lara")
+                    break;
+                    default:
+                        break;
+                }
+            }
+
+
+
+        }
+    </script>
+</body>
+</html>
