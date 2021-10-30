@@ -3,5 +3,5 @@ pois foi feito pela uma pessoa gringa
 
 
 ---------------------------------------
-(Javascript)
+Javascript
 ---------------------------------------
